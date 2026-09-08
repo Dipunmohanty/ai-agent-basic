@@ -12,11 +12,11 @@ from prompt import available_functions, system_prompt
 def main():
     
     load_dotenv()
-    api_key = os.environ.get("NVIDIA_API_KEY3")
+    api_key = os.environ.get("model-api-key")
     if api_key is None:
         raise RuntimeError("No api key found.")
     client = OpenAI(
-        base_url = "https://integrate.api.nvidia.com/v1",
+        base_url = "model-url",
         api_key=api_key,
     )
     parser = argparse.ArgumentParser(description="Chatbot")
@@ -31,7 +31,7 @@ def main():
     # Now we can access `args.user_prompt`
     for i in range(20):
         response = client.chat.completions.create(
-            model = "nvidia/nemotron-3-ultra-550b-a55b",
+            model = "model-name",
             messages = messages,
             tools=available_functions,
         )
